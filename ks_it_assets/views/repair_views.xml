@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==============================
+         Servis/Tamir — Tree Görünümü
+         ============================== -->
+    <record id="view_ks_it_repair_tree" model="ir.ui.view">
+        <field name="name">ks.it.repair.tree</field>
+        <field name="model">ks.it.repair</field>
+        <field name="arch" type="xml">
+            <tree decoration-warning="state == 'in_progress'"
+                  decoration-success="state == 'done'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name" string="Talep No"/>
+                <field name="asset_id"/>
+                <field name="repair_type"/>
+                <field name="technician_id"/>
+                <field name="report_date"/>
+                <field name="issue_description"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'in_progress'"
+                       decoration-success="state == 'done'"
+                       decoration-muted="state == 'cancelled'"/>
+                <button name="action_start" type="object"
+                        string="İşleme Al"
+                        class="btn-sm btn-warning"
+                        invisible="state != 'draft'"/>
+                <button name="action_done" type="object"
+                        string="Tamamlandı"
+                        class="btn-sm btn-success"
+                        invisible="state != 'in_progress'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ==============================
+         Servis/Tamir — Form Görünümü
+         ============================== -->
+    <record id="view_ks_it_repair_form" model="ir.ui.view">
+        <field name="name">ks.it.repair.form</field>
+        <field name="model">ks.it.repair</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" type="object"
+                            string="İşleme Al" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_done" type="object"
+                            string="Tamamlandı ✓" class="oe_highlight"
+                            invisible="state != 'in_progress'"
+                            groups="ks_it_assets.group_ks_it_admin"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Servis Detayı">
+                            <field name="asset_id"/>
+                            <field name="repair_type"/>
+                            <field name="technician_id"/>
+                        </group>
+                        <group string="Tarihler">
+                            <field name="report_date"/>
+                            <field name="completion_date" readonly="1"
+                                   invisible="state not in ('done','cancelled')"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="issue_description" placeholder="Arıza özeti veya saha işi açıklaması..."/>
+                    </group>
+                    <group invisible="state not in ('done',)">
+                        <field name="resolution_note" placeholder="Yapılan işlemler, kullanılan parçalar, çözüm..."/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_ks_it_repair_search" model="ir.ui.view">
+        <field name="name">ks.it.repair.search</field>
+        <field name="model">ks.it.repair</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="technician_id"/>
+                <filter string="Bekleyenler" name="filter_draft" domain="[('state','=','draft')]"/>
+                <filter string="İşlemdekiler" name="filter_progress" domain="[('state','=','in_progress')]"/>
+                <filter string="Tamamlananlar" name="filter_done" domain="[('state','=','done')]"/>
+                <group expand="0" string="Grupla...">
+                    <filter string="İşlem Türü" name="group_by_type" context="{'group_by': 'repair_type'}"/>
+                    <filter string="Durum" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_ks_it_repair" model="ir.actions.act_window">
+        <field name="name">Teknik Servis ve Saha Çıkışları</field>
+        <field name="res_model">ks.it.repair</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

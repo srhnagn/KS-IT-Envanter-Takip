@@ -1,0 +1,41 @@
+/* ==============================================
+   KS IT Asset Manager — Backend Dark Theme
+   Kaleseramik Envanter renk sistemiyle uyumlu
+   ============================================== */
+
+:root {
+    --ks-it-primary: #6366f1;      /* Indigo / IT tonu */
+    --ks-it-secondary: #0f172a;    /* Lacivert arka plan */
+    --ks-it-surface: #1e293b;      /* Kart / Panel yüzeyi */
+    --ks-it-border: #334155;       /* Kenarlık */
+    --ks-it-text: #e2e8f0;         /* Ana metin */
+    --ks-it-muted: #94a3b8;        /* Soluk metin */
+    --ks-it-success: #22c55e;
+    --ks-it-warning: #f59e0b;
+    --ks-it-danger: #ef4444;
+}
+
+/* Genel Arka Plan */
+.o_action_manager,
+.o_view_controller {
+    background-color: var(--ks-it-secondary) !important;
+}
+
+/* Liste Satırları */
+.o_list_view .o_data_row:hover td {
+    background-color: rgba(99, 102, 241, 0.07) !important;
+}
+
+/* Form Başlığı */
+.o_form_view .o_form_sheet .oe_title h1 .o_field_widget input {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ks-it-primary);
+}
+
+/* Status Bar */
+.o_statusbar_status button.o_arrow_button_current {
+    background-color: var(--ks-it-primary) !important;
+    border-color: var(--ks-it-primary) !important;
+    color: #fff !important;
+}

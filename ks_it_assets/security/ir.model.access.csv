@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ks_it_asset_user,ks.it.asset.user,model_ks_it_asset,ks_it_assets.group_ks_it_user,1,1,1,0
+access_ks_it_asset_admin,ks.it.asset.admin,model_ks_it_asset,ks_it_assets.group_ks_it_admin,1,1,1,1
+access_ks_it_assignment_user,ks.it.assignment.user,model_ks_it_assignment,ks_it_assets.group_ks_it_user,1,1,1,0
+access_ks_it_assignment_admin,ks.it.assignment.admin,model_ks_it_assignment,ks_it_assets.group_ks_it_admin,1,1,1,1
+access_ks_it_repair_user,ks.it.repair.user,model_ks_it_repair,ks_it_assets.group_ks_it_user,1,1,1,0
+access_ks_it_repair_admin,ks.it.repair.admin,model_ks_it_repair,ks_it_assets.group_ks_it_admin,1,1,1,1

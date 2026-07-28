@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_ks_it_assignment" model="ir.sequence">
+            <field name="name">KS IT Zimmet Sırası</field>
+            <field name="code">ks.it.assignment</field>
+            <field name="prefix">ZMT-%(year)s-</field>
+            <field name="padding">4</field>
+        </record>
+        <record id="sequence_ks_it_repair" model="ir.sequence">
+            <field name="name">KS IT Servis Sırası</field>
+            <field name="code">ks.it.repair</field>
+            <field name="prefix">SRV-%(year)s-</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

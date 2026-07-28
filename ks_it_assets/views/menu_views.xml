@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ana Menü -->
+    <menuitem id="menu_ks_it_root"
+              name="KS IT Zimmet"
+              sequence="20"
+              web_icon="ks_it_assets,static/description/icon.png"/>
+
+    <!-- Alt Menüler -->
+    <menuitem id="menu_ks_it_dashboard"
+              name="Dashboard"
+              parent="menu_ks_it_root"
+              action="action_ks_it_dashboard"
+              sequence="0"/>
+
+    <menuitem id="menu_ks_it_assets"
+              name="IT Varlıkları"
+              parent="menu_ks_it_root"
+              action="action_ks_it_asset"
+              sequence="1"/>
+
+    <menuitem id="menu_ks_it_assignment"
+              name="Zimmet ve Ödünç"
+              parent="menu_ks_it_root"
+              action="action_ks_it_assignment"
+              sequence="2"/>
+
+    <menuitem id="menu_ks_it_repair"
+              name="Teknik Servis"
+              parent="menu_ks_it_root"
+              action="action_ks_it_repair"
+              sequence="3"/>
+</odoo>
