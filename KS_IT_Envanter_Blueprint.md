@@ -42,3 +42,10 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 ### 3. Barkod / Seri Numarası Taraması
 *   **Problem:** Sahada yüzlerce cihaz arasında doğru ekipmanı bulmanın zorluğu.
 *   **Çözüm:** Varlıklar (`ks.it.asset`) tablosuna bir `barcode` alanı eklendi. Gelecekte bir barkod okuyucu veya mobil kamera ile sisteme entegrasyon yapılabilmesi için temel veritabanı altyapısı hazırlandı.
+
+### 4. Ekstra (Blueprint'te Olmayan) Mükemmelleştirmeler
+*   **Özelleştirilmiş Yönetim Paneli:** OWL (Odoo Web Library) JS tabanlı modern Dashboard.
+*   **Koyu Tema Uyumluluğu:** CSS/SCSS ile Kaleseramik koyu temasına özel yüksek kontrastlı 7 farklı varlık kategorisi rengi (Neon renk paleti).
+*   **Dinamik Tasarım:** Satır renkleriyle eşleşen ve transparan zemin kullanan Odoo Badge (Rozet) tasarımları.
+*   **Kurumsal Servis Simülasyonu:** Teknik Servis mantığının kurumsal ERP iş akışına göre simüle edilmesi (Servis dönüşünde önceki zimmetin tanınması vb.).
+*   **Dinamik Uyarılar:** Geciken ödünç zimmetler için dinamik hesaplanan durum tetikleyicileri (`display_state`).
