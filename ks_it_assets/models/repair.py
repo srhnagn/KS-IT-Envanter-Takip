@@ -36,15 +36,34 @@ class KsItRepair(models.Model):
         for vals in vals_list:
             if vals.get('name', 'Yeni Servis') == 'Yeni Servis':
                 vals['name'] = self.env['ir.sequence'].next_by_code('ks.it.repair') or 'SRV-YENI'
-        return super().create(vals_list)
+        records = super().create(vals_list)
+        # Kayıt oluşturulurken zaten 'in_progress' ise varlığı senkronize et
+        for record in records:
+            if record.state == 'in_progress' and record.asset_id:
+                record.asset_id.status = 'repair'
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        # Durum değişikliklerinde varlık durumunu otomatik güncelle
+        if 'state' in vals:
+            for record in self:
+                if record.state == 'in_progress' and record.asset_id:
+                    record.asset_id.status = 'repair'
+                elif record.state in ['done', 'cancelled'] and record.asset_id:
+                    if record.asset_id.current_assignee_id:
+                        record.asset_id.status = 'assigned'
+                    else:
+                        record.asset_id.status = 'available'
+        return res
 
     def action_start(self):
         for record in self:
             record.state = 'in_progress'
-            record.asset_id.status = 'repair'
+            # write() hook'u zaten asset_id.status = 'repair' yapacak
 
     def action_done(self):
         for record in self:
             record.state = 'done'
             record.completion_date = fields.Date.context_today(record)
-            record.asset_id.status = 'available'
+            # write() hook'u zaten asset_id.status = 'available' yapacak

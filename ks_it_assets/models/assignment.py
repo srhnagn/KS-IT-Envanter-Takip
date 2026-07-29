@@ -26,6 +26,18 @@ class KsItAssignment(models.Model):
         ('returned', 'İade Edildi')
     ], string='Durum', default='draft', tracking=True)
     
+    display_state = fields.Char(string='Durum (Gösterim)', compute='_compute_display_state')
+    
+    @api.depends('state', 'assignment_type', 'expected_return_date')
+    def _compute_display_state(self):
+        today = fields.Date.context_today(self)
+        for record in self:
+            if record.state == 'active' and record.assignment_type == 'temporary' and record.expected_return_date and record.expected_return_date < today:
+                record.display_state = 'İadesi Gecikti (Personelde)'
+            else:
+                state_dict = dict(record._fields['state'].selection)
+                record.display_state = state_dict.get(record.state, 'Bilinmiyor')
+    
     note = fields.Text(string='Notlar')
     document_pdf = fields.Binary(string='İmzalı Zimmet Formu (PDF)')
     document_filename = fields.Char(string='Dosya Adı')

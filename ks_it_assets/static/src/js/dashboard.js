@@ -95,5 +95,5 @@ export class KsItDashboard extends Component {
     }
 }
 
-KsItDashboard.template = "ks_it_assets.Dashboard";
+KsItDashboard.template = "ks_it_assets.Dashboard_Premium";
 registry.category("actions").add("ks_it_assets_dashboard", KsItDashboard);

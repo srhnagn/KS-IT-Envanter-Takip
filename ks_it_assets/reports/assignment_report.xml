@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- PDF Rapor Aksiyonu -->
+        <record id="action_report_it_assignment" model="ir.actions.report">
+            <field name="name">Zimmet Tutanağı Yazdır</field>
+            <field name="model">ks.it.assignment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ks_it_assets.report_it_assignment_document</field>
+            <field name="report_file">ks_it_assets.report_it_assignment_document</field>
+            <field name="print_report_name">'Zimmet_Tutanagi_%s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_ks_it_assignment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- QWeb PDF Şablonu -->
+        <template id="report_it_assignment_document">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="font-family: 'Helvetica', sans-serif;">
+                            
+                            <h2 class="text-center mt-2 mb-3" style="color: #1e293b; font-weight: bold;">IT DONANIM TESLİM VE ZİMMET TUTANAĞI</h2>
+                            
+                            <div class="row mt-2 mb-3">
+                                <div class="col-6">
+                                    <strong>İşlem Kodu:</strong> <span t-field="o.name"/><br/>
+                                    <strong>Veriliş Tarihi:</strong> <span t-field="o.assigned_date"/><br/>
+                                    <strong>İşlem Türü:</strong> 
+                                    <span t-if="o.assignment_type == 'permanent'">Kalıcı Zimmet</span>
+                                    <span t-if="o.assignment_type == 'temporary'">Geçici Ödünç</span>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <t t-if="o.expected_return_date">
+                                        <strong>Beklenen İade Tarihi:</strong> <span t-field="o.expected_return_date"/><br/>
+                                    </t>
+                                    <strong>Durum:</strong> 
+                                    <span t-field="o.state"/>
+                                </div>
+                            </div>
+
+                            <hr style="border-color: #cbd5e1; margin-top: 5px; margin-bottom: 15px;"/>
+
+                            <h4 class="mt-2 mb-2" style="color: #3b82f6; font-size: 1.1em;">Teslim Alan Personel Bilgileri</h4>
+                            <table class="table table-sm table-bordered mb-3">
+                                <tr>
+                                    <th style="width: 30%; background-color: #f8fafc; padding: 4px;">Adı Soyadı</th>
+                                    <td style="padding: 4px;"><span t-field="o.employee_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">E-Posta Adresi</th>
+                                    <td style="padding: 4px;"><span t-field="o.employee_id.email"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">Telefon</th>
+                                    <td style="padding: 4px;"><span t-field="o.employee_id.phone"/></td>
+                                </tr>
+                            </table>
+
+                            <h4 class="mt-2 mb-2" style="color: #3b82f6; font-size: 1.1em;">Zimmetlenen Cihaz / Varlık Bilgileri</h4>
+                            <table class="table table-sm table-bordered mb-3">
+                                <tr>
+                                    <th style="width: 30%; background-color: #f8fafc; padding: 4px;">Cihaz Adı / Tanımı</th>
+                                    <td style="padding: 4px;"><span t-field="o.asset_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">Marka / Model</th>
+                                    <td style="padding: 4px;"><span t-field="o.asset_id.brand"/> <span t-field="o.asset_id.model_name"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">Seri No / Servis Etiketi</th>
+                                    <td style="padding: 4px;"><span t-field="o.asset_id.serial_number"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">Varlık Türü</th>
+                                    <td style="padding: 4px;"><span t-field="o.asset_id.asset_type"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8fafc; padding: 4px;">Barkod</th>
+                                    <td style="padding: 4px;"><span t-field="o.asset_id.barcode"/></td>
+                                </tr>
+                            </table>
+
+                            <h4 class="mt-2 mb-2" style="color: #3b82f6; font-size: 1.1em;">Ek Notlar ve Açıklamalar</h4>
+                            <div style="border: 1px solid #dee2e6; padding: 8px; border-radius: 5px; min-height: 40px; margin-bottom: 20px;">
+                                <span t-field="o.note"/>
+                            </div>
+
+                            <div style="page-break-inside: avoid; margin-top: 15px;">
+                                <p style="font-size: 0.85em; color: #64748b; text-align: justify; margin-bottom: 20px;">
+                                    <em>Yukarıda özellikleri belirtilen şirket demirbaşı / IT donanımı, eksiksiz ve çalışır durumda tarafıma teslim edilmiştir. Cihazı şirket politikalarına uygun olarak kullanacağımı, görevden ayrılmam veya talep edilmesi halinde aynı kondisyonda iade edeceğimi beyan ve kabul ederim.</em>
+                                </p>
+                                <table style="width: 100%; border: none; text-align: center;">
+                                    <tr>
+                                        <td style="width: 50%; border: none; vertical-align: top;">
+                                            <strong>Teslim Eden (IT Departmanı)</strong><br/><br/><br/><br/>
+                                            _______________________<br/>
+                                            İmza
+                                        </td>
+                                        <td style="width: 50%; border: none; vertical-align: top;">
+                                            <strong>Teslim Alan Personel</strong><br/>
+                                            <span t-field="o.employee_id.name"/><br/><br/><br/>
+                                            _______________________<br/>
+                                            İmza
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -7,19 +7,21 @@
         <field name="name">ks.it.assignment.tree</field>
         <field name="model">ks.it.assignment</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'active'"
-                  decoration-muted="state == 'returned'"
-                  decoration-warning="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'">
+            <tree decoration-itneon-green="state == 'active'"
+                  decoration-itneon-slate="state == 'returned'"
+                  decoration-itneon-red="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'">
                 <field name="name" string="İşlem Kodu"/>
                 <field name="asset_id"/>
                 <field name="employee_id"/>
                 <field name="assignment_type" string="Tür"/>
                 <field name="assigned_date"/>
                 <field name="expected_return_date"/>
-                <field name="state" widget="badge"
-                       decoration-success="state == 'active'"
+                <field name="state" column_invisible="1"/>
+                <field name="display_state" string="Durum" widget="badge"
+                       decoration-itneon-green="state == 'active' and not (assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date)"
                        decoration-info="state == 'draft'"
-                       decoration-muted="state == 'returned'"/>
+                       decoration-itneon-slate="state == 'returned'"
+                       decoration-itneon-red="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'"/>
                 <button name="action_confirm" type="object"
                         string="Onayla / Zimmetle"
                         class="btn-sm btn-success"
@@ -45,6 +47,9 @@
                             string="Onayla ve Zimmetle" class="oe_highlight"
                             invisible="state != 'draft'"
                             groups="ks_it_assets.group_ks_it_admin"/>
+                    <button name="%(action_report_it_assignment)d" type="action"
+                            string="Tutanağı Yazdır" class="btn-primary" icon="fa-print"
+                            invisible="state != 'active'"/>
                     <button name="action_return" type="object"
                             string="İade Teslim Al" class="btn-warning"
                             invisible="state != 'active'"
@@ -73,6 +78,9 @@
                         </group>
                     </group>
                     <group string="İmzalı Zimmet Belgesi">
+                        <div colspan="2" class="alert alert-info" role="alert" style="margin-bottom: 10px;">
+                            <i class="fa fa-info-circle"/> <b>Bilgi:</b> İmzalı zimmet formunu yüklemek için önce yukarıdaki <b>Tutanağı Yazdır</b> butonuna basınız ve çıktıyı taraflar olarak imzalayınız. İmzaladıktan sonra belgeyi taratıp aşağıdaki alandan sisteme yükleyebilirsiniz.
+                        </div>
                         <field name="document_pdf" widget="binary" filename="document_filename"/>
                         <field name="document_filename" invisible="1"/>
                     </group>

@@ -1,41 +1,584 @@
-/* ==============================================
-   KS IT Asset Manager — Backend Dark Theme
-   Kaleseramik Envanter renk sistemiyle uyumlu
-   ============================================== */
+/* ks_envanter/static/src/scss/backend_overrides.scss */
 
 :root {
-    --ks-it-primary: #6366f1;      /* Indigo / IT tonu */
-    --ks-it-secondary: #0f172a;    /* Lacivert arka plan */
-    --ks-it-surface: #1e293b;      /* Kart / Panel yüzeyi */
-    --ks-it-border: #334155;       /* Kenarlık */
-    --ks-it-text: #e2e8f0;         /* Ana metin */
-    --ks-it-muted: #94a3b8;        /* Soluk metin */
+    --ks-bg-dark: #030f26;
+    --ks-bg-card: rgba(15, 23, 42, 0.8);
+    --ks-text-main: #e2e8f0;
+    --ks-text-muted: #94a3b8;
+    --ks-border-color: rgba(255, 255, 255, 0.1);
+    --ks-accent: #facc15;
+    
+    /* Dashboard Variables */
+    --ks-it-primary: #6366f1;
+    --ks-it-secondary: #0f172a;
+    --ks-it-surface: rgba(15, 23, 42, 0.8);
+    --ks-it-border: #334155;
+    --ks-it-text: #e2e8f0;
+    --ks-it-muted: #94a3b8;
     --ks-it-success: #22c55e;
     --ks-it-warning: #f59e0b;
     --ks-it-danger: #ef4444;
 }
 
-/* Genel Arka Plan */
-.o_action_manager,
-.o_view_controller {
-    background-color: var(--ks-it-secondary) !important;
+/* Genel Arka Plan (Global Backend Background) */
+body, .o_web_client, .o_action_manager, .o_view_controller, .o_content, .o_view_nocontent,
+.o_kanban_renderer, .o_list_renderer, .o_form_view, .o_form_sheet_bg, .bg-view, .bg-white {
+    background-color: #030f26 !important; /* Navy 950 */
+    background-image: none !important;
+    color: #e2e8f0 !important;
 }
 
-/* Liste Satırları */
-.o_list_view .o_data_row:hover td {
-    background-color: rgba(99, 102, 241, 0.07) !important;
+/* Tüm Kartlar (Dashboard dahil) için Koyu Arka Plan */
+.card, .o_action_manager .card, .o_view_nocontent .o_nocontent_help {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Form Başlığı */
-.o_form_view .o_form_sheet .oe_title h1 .o_field_widget input {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--ks-it-primary);
+/* En Üst Navbar (Menü Çubuğu) Rengi (Odoo 17 class: .o_navbar) */
+.o_navbar, .o_main_navbar {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Status Bar */
-.o_statusbar_status button.o_arrow_button_current {
-    background-color: var(--ks-it-primary) !important;
-    border-color: var(--ks-it-primary) !important;
-    color: #fff !important;
+/* Navbar ve Control Panel Arka Plan Düzeltmeleri */
+.o_control_panel, .breadcrumb, .o_list_view .o_list_table {
+    background-color: transparent !important; /* Beyaz arkaplanı yok et ve gövdeye (koyu lacivert) uydur */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #e2e8f0 !important;
 }
+.o_control_panel .breadcrumb-item.active { 
+    color: #facc15 !important; 
+    font-weight: 600;
+    padding-top: 6px; /* align with the button */
+}
+
+/* Style the clickable breadcrumb (Geri Dön / Back Button) */
+.o_control_panel .breadcrumb-item:not(.active) a {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+.o_control_panel .breadcrumb-item:not(.active) a:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.o_control_panel .breadcrumb-item:not(.active) a::before {
+    font-family: "FontAwesome";
+    content: "\f060"; /* fa-arrow-left */
+    margin-right: 8px;
+    font-weight: normal;
+}
+.o_control_panel .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.3) !important; /* Divider color */
+    padding-top: 6px;
+}
+.o_control_panel .o_cp_searchview {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o_control_panel input { color: #f8fafc !important; }
+
+/* Kaydet (Cloud) ve Vazgeç (Undo) Butonlarını Yazıya Çevirme */
+.o_form_button_save i, .o_form_button_cancel i { display: none !important; }
+.o_form_button_save, .o_form_button_cancel { font-size: 0 !important; padding: 6px 16px !important; border-radius: 6px !important; margin-left: 5px !important; border: none !important; }
+.o_form_button_save::after { content: "Kaydet"; font-size: 0.95rem; font-weight: 600; }
+.o_form_button_cancel::after { content: "Vazgeç"; font-size: 0.95rem; font-weight: 600; }
+.o_form_button_save { background-color: #10b981 !important; color: white !important; }
+.o_form_button_cancel { background-color: #ef4444 !important; color: white !important; }
+
+/* Kanban Kartları */
+.o_kanban_record, .o_kanban_record .oe_kanban_global_click, .o_kanban_record .card {
+    background: rgba(15, 23, 42, 0.8) !important;
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 1rem !important;
+    color: #e2e8f0 !important;
+}
+.o_kanban_record:hover, .o_kanban_record:hover .oe_kanban_global_click {
+    border-color: rgba(250, 204, 21, 0.5) !important;
+}
+.o_kanban_record .o_kanban_record_title, .o_kanban_record span { color: #f8fafc !important; }
+.o_kanban_image { background: transparent !important; }
+
+/* Liste / Tablo Görünümü */
+.o_list_table, .table {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o_list_table thead, .o_list_table thead tr, .o_list_table th {
+    background-color: #0f172a !important;
+    color: #94a3b8 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o_list_table tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.o_list_table td {
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: transparent !important;
+}
+
+/* Checkbox (Satır Seçme) Düzeltmesi */
+.o_list_table input[type="checkbox"], .custom-checkbox .custom-control-input ~ .custom-control-label::before, .form-check-input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+}
+.o_list_table input[type="checkbox"]:checked, .form-check-input:checked {
+    background-color: #10b981 !important;
+    border-color: #10b981 !important;
+}
+
+/* Form Kartı */
+.o_form_sheet {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 1rem !important;
+    color: #e2e8f0 !important;
+}
+.o_form_sheet input, .o_form_sheet select, .o_form_sheet textarea {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+}
+.o_form_sheet label { color: #94a3b8 !important; }
+
+/* Butonlar */
+.btn-primary {
+    background-color: #facc15 !important;
+    border-color: #facc15 !important;
+    color: #0f172a !important;
+}
+.btn-secondary, .btn-light {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #e2e8f0 !important;
+}
+.btn-secondary:hover, .btn-light:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+button:not(.btn-primary):not(.btn-secondary):not(.btn-light):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info) {
+    color: inherit;
+}
+
+/* "New" Butonu Yazısını Değiştirme Hilesi */
+.o_list_button_add, .o_kanban_button_new, .o_form_button_create {
+    font-size: 0 !important;
+}
+.o_list_button_add::after, .o_kanban_button_new::after, .o_form_button_create::after {
+    content: "Yeni Oluştur +";
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Modal (Popup) Düzeltmeleri */
+.modal-content {
+    background-color: #0f172a !important; /* Lacivert arka plan */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 1rem !important;
+    color: #e2e8f0 !important;
+}
+.modal-header, .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(15, 23, 42, 0.9) !important;
+}
+.modal-title {
+    color: #facc15 !important; /* Başlık sarı-altın rengi olsun */
+}
+.modal-body {
+    background-color: #0f172a !important;
+    color: #cbd5e1 !important;
+}
+.modal-content .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Chat Window and Popovers */
+.o-mail-ChatWindow-header, .o-mail-ChatWindow-header.bg-100 {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: #facc15 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o-mail-ChatWindow {
+    background-color: #0f172a !important;
+}
+.o_switch_company_menu {
+    display: none !important; /* Hide multi-company switcher if not needed */
+}
+
+/* Mesajlaşma ve Chatter Gizleme (Müşteri İsteği) */
+.o-mail-MessagingMenu, .o_menu_systray .o-mail-MessagingMenu, .o-mail-Chatter, .o-mail-Form-chatter, .o_FormRenderer_chatterContainer {
+    display: none !important;
+}
+
+
+/* Bildirimler (Toasts / Notifications) */
+.o_notification_manager .o_notification, .toast {
+    background-color: #0f172a !important; /* Lacivert arka plan */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important; /* Okunabilir beyaz yazı */
+}
+.o_notification_manager .o_notification .toast-header, .toast-header {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: #facc15 !important; /* Başlıklar sarı */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o_notification_manager .o_notification .toast-body, .toast-body {
+    color: #e2e8f0 !important;
+}
+.o_notification_manager .o_notification .btn-close, .toast .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Odoo Messaging Menu / Popovers (Bildirimler Penceresi) */
+.o-mail-MessagingMenu, .o_Popover, .dropdown-menu, .o-mail-NotificationItem, .o-mail-NotificationItem.list-group-item, .o-mail-MessagingMenu .list-group-item {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.dropdown-item, .o-mail-NotificationItem, .o-mail-ThreadItem, .o-mail-MessagingMenu .list-group-item {
+    color: #e2e8f0 !important;
+}
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active, .dropdown-item.selected, .o-mail-NotificationItem:hover, .o-mail-ThreadItem:hover, .o-mail-MessagingMenu .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+}
+.o-mail-MessagingMenu-header, .dropdown-header {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: #facc15 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.o-mail-NotificationItem-text, .o-mail-NotificationItem-name, .o-mail-ThreadItem-name, .o-mail-ThreadItem-preview {
+    color: #cbd5e1 !important;
+}
+.o-mail-NotificationItem-date, .o-mail-ThreadItem-date {
+    color: #94a3b8 !important;
+}
+
+/* Tablo Başlıkları ve Hücrelerinde Uzun Metinlerin Alt Satıra Kayması (Text Wrapping) */
+.o_list_table th, .o_list_table td,
+.o_list_table th .text-truncate, .o_list_table td .text-truncate,
+.o_list_table th span, .o_list_table th .o_column_title {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    text-overflow: unset !important;
+    overflow: visible !important;
+}
+
+/* Üst Menü İkonları (FontAwesome CSS Enjeksiyonu) - KS IT ZIMMET */
+a[data-menu-xmlid="ks_it_assets.menu_ks_it_dashboard"]::before { font-family: "FontAwesome"; content: "\f015"; margin-right: 6px; font-weight: normal; } /* Dashboard (House) */
+a[data-menu-xmlid="ks_it_assets.menu_ks_it_assets"]::before { font-family: "FontAwesome"; content: "\f108"; margin-right: 6px; font-weight: normal; } /* Laptop (IT Varlıkları) */
+a[data-menu-xmlid="ks_it_assets.menu_ks_it_assignment"]::before { font-family: "FontAwesome"; content: "\f2b5"; margin-right: 6px; font-weight: normal; } /* Handshake (Zimmet ve Ödünç) */
+a[data-menu-xmlid="ks_it_assets.menu_ks_it_repair"]::before { font-family: "FontAwesome"; content: "\f0ad"; margin-right: 6px; font-weight: normal; } /* Wrench (Teknik Servis) */
+
+/* =========================================
+   GRAPH & PIVOT VIEW DARK MODE OVERRIDES
+   ========================================= */
+.o_graph_view, .o_pivot_view, .o_view_controller.o_graph_view > div, .o_view_controller.o_pivot_view > div {
+    background-color: var(--ks-bg-dark) !important;
+    color: var(--ks-text-main) !important;
+}
+
+/* Make ChartJs canvas background dark */
+.o_graph_canvas_container {
+    background-color: var(--ks-bg-card) !important;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--ks-border-color) !important;
+}
+
+/* Control Panel for Graphs (Buttons for Pie, Bar, Line) */
+.o_control_panel {
+    background-color: var(--ks-bg-dark) !important;
+    border-bottom: 1px solid var(--ks-border-color) !important;
+}
+.o_cp_bottom_left .btn, .o_cp_bottom_right .btn {
+    background-color: var(--ks-bg-card) !important;
+    color: var(--ks-text-main) !important;
+    border-color: var(--ks-border-color) !important;
+}
+.o_cp_bottom_left .btn.active, .o_cp_bottom_right .btn.active {
+    background-color: var(--ks-accent) !important;
+    color: white !important;
+}
+
+/* =========================================
+   BUTTON TEXT LABELS (UX IMPROVEMENTS)
+   ========================================= */
+/* View Switchers */
+button.o_switch_view.o_graph::after { content: " Grafik"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_switch_view.o_pivot::after { content: " Pivot"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_switch_view.o_list::after { content: " Liste"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+
+/* Graph Modes */
+button.o_graph_button[data-mode="bar"]::after, button:has(> i.fa-bar-chart)::after { content: " Çubuk"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_graph_button[data-mode="line"]::after, button:has(> i.fa-line-chart)::after { content: " Çizgi"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_graph_button[data-mode="pie"]::after, button:has(> i.fa-pie-chart)::after { content: " Pasta"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+
+/* Ekstra Grafik Butonları (Yığın, Kümülatif, Sıralama) */
+button:has(> i.fa-database)::after, button[data-tooltip*="Yığılmış"]::after, button[data-tooltip*="Stacked"]::after { content: " Yığın"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button:has(> i.fa-signal)::after, button[data-tooltip*="Kümülatif"]::after, button[data-tooltip*="Cumulative"]::after { content: " Kümülatif"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button:has(> i.fa-sort-amount-desc)::after, button:has(> i.fa-sort-amount-down)::after, button[data-tooltip*="Azalan"]::after, button[data-tooltip*="Descending"]::after { content: " Azalan"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button:has(> i.fa-sort-amount-asc)::after, button:has(> i.fa-sort-amount-up)::after, button[data-tooltip*="Artan"]::after, button[data-tooltip*="Ascending"]::after { content: " Artan"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+
+/* Pivot Modes */
+button.o_pivot_flip_button::after, button:has(> i.fa-arrows-h)::after { content: " Çevir"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_pivot_expand_button::after, button:has(> i.fa-expand)::after { content: " Genişlet"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+button.o_pivot_download_button::after, button:has(> i.fa-download)::after { content: " İndir"; margin-left: 5px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; }
+
+/* Ensure the buttons have some padding for the new text */
+.o_cp_bottom_left .btn, .o_cp_bottom_right .btn {
+    padding-left: 10px !important;
+    padding-right: 12px !important;
+}
+
+
+/* =========================================
+   PIVOT TABLE DARK MODE
+   ========================================= */
+/* Bütün tablo hücrelerini ve başlıkları koyu yap */
+.o_pivot table, .o_pivot table tbody, .o_pivot table thead, .o_pivot table tr, .o_pivot table th, .o_pivot table td {
+    background-color: var(--ks-bg-card) !important;
+    color: #f8fafc !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Kesişim ve Toplam değerleri için spesifik koyuluk */
+.o_pivot table .o_pivot_cell_value, .o_pivot table .o_pivot_header_cell_closed, .o_pivot table .o_pivot_header_cell_opened {
+    background-color: var(--ks-bg-dark) !important;
+    color: #f8fafc !important;
+}
+
+/* Hover efekti - parlak beyazı engellemek için çok koyu gri */
+.o_pivot table th:hover, .o_pivot table td:hover, .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+/* Give pivot table a nice border radius if possible */
+.o_pivot {
+    border: 1px solid var(--ks-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   MODAL / PREFERENCES DIALOG DARK MODE
+   ========================================= */
+.modal-content, .o_dialog .modal-content {
+    background-color: #0f172a !important; /* Ana Dashboard Arkaplan Rengi */
+    color: #e2e8f0 !important;
+    border-color: #1e293b !important;
+    border-radius: 12px !important;
+    overflow: hidden !important; /* Prev (sharp corners overlay) issue */
+}
+
+.modal-header, .modal-footer, .modal-body {
+    background-color: #0f172a !important; 
+    border-color: #1e293b !important;
+}
+
+.modal-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem !important; /* Extra top padding */
+    display: flex !important;
+    align-items: flex-start !important;
+}
+
+/* Fix title text getting cut off at the top */
+.modal-header .modal-title, .modal-header h4 {
+    line-height: 1.5 !important;
+    padding-top: 10px !important;
+    margin-top: 5px !important;
+    overflow: visible !important;
+}
+
+/* Odoo Forms inside Modals have specific white backgrounds */
+.modal-body .o_form_view, 
+.modal-body .o_form_renderer, 
+.modal-body .o_form_sheet_bg, 
+.modal-body .o_form_sheet, 
+.modal-body .o-form-layout, 
+.modal-body .o_content,
+.modal-body .o_setting_box,
+.modal-body .o_notebook,
+.modal-body .o_notebook_headers,
+.modal-body .tab-content,
+.modal-body .tab-pane,
+.modal-body .o_group,
+.modal-body > div,
+.modal-body > div > div {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Make nav background transparent but KEEP its borders */
+.modal-body .nav-tabs,
+.modal-body ul.nav {
+    background-color: transparent !important;
+}
+
+/* Text and Labels inside modal */
+.modal-body h1, .modal-body h2, .modal-body h3, .modal-body h4, .modal-body h5, .modal-body h6, 
+.modal-body span, .modal-body label, .modal-body .o_form_label, .modal-body .o_field_widget {
+    color: #e2e8f0 !important;
+}
+
+/* Input fields inside modals */
+.modal-content input, .modal-content select, .modal-content textarea, .modal-body .o_input {
+    background-color: var(--ks-bg-card) !important;
+    color: var(--ks-text-main) !important;
+    border: 1px solid var(--ks-border-color) !important;
+}
+
+/* Tabs inside Modal */
+.modal-content .nav-tabs {
+    border-bottom: 1px solid #1e293b !important;
+}
+.modal-content .nav-tabs .nav-link {
+    color: var(--ks-text-muted) !important;
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+    margin-bottom: -1px; /* Align with bottom border */
+}
+.modal-content .nav-tabs .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.04) !important; /* Slightly distinct background */
+    color: var(--ks-accent) !important;
+    border: 1px solid #334155 !important; /* Full border box */
+    border-radius: 4px;
+}
+
+/* Close Button and Alerts */
+.modal-content .btn-close, .modal-content .close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+.modal-content .alert {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--ks-text-main) !important;
+}
+
+/* =========================================
+   SETTINGS PAGE (AYARLAR) DARK MODE
+   ========================================= */
+.o_base_settings_view .o_form_renderer {
+    --settings__tab-bg: #0f172a !important;
+    --settings__tab-bg--active: rgba(255, 255, 255, 0.05) !important;
+    --settings__tab-color: #94a3b8 !important;
+    --settings__title-bg: rgba(15, 23, 42, 0.9) !important;
+}
+.o_base_settings_view .settings {
+    background-color: var(--ks-bg-dark) !important;
+}
+.o_base_settings_view .settings_tab .selected {
+    box-shadow: inset 3px 0 0 var(--ks-accent) !important;
+    color: var(--ks-text-main) !important;
+}
+.o_settings_container, .app_settings_block, .o_setting_box {
+    background-color: transparent !important;
+    color: var(--ks-text-main) !important;
+}
+.app_settings_block .o_setting_box {
+    background-color: var(--ks-bg-card) !important;
+    border: 1px solid var(--ks-border-color) !important;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+.o_setting_box .o_setting_left_pane, .o_setting_box .o_setting_right_pane {
+    color: var(--ks-text-main) !important;
+}
+.o_setting_box .o_form_label {
+    color: var(--ks-text-main) !important;
+    font-weight: 600;
+}
+.o_setting_box .text-muted {
+    color: var(--ks-text-muted) !important;
+}
+.settings .app_settings_block h2 {
+    color: var(--ks-accent) !important;
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--ks-border-color);
+}
+.o_base_settings .o_control_panel {
+    background-color: var(--ks-bg-dark) !important;
+}
+.o_base_settings .o_setting_search {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--ks-border-color) !important;
+    color: var(--ks-text-main) !important;
+}
+.o_base_settings .o_setting_search .searchInput {
+    color: var(--ks-text-main) !important;
+}
+
+/* =========================================
+   HIDE UNWANTED SYSTRAY & USER MENU ITEMS
+   ========================================= */
+/* Hide messaging and activity icons in systray */
+.o_menu_systray .o-mail-MessagingMenu,
+.o_menu_systray .o_mail_systray_item,
+.o_menu_systray i.fa-comments,
+.o_menu_systray i.fa-clock-o,
+.o_menu_systray .o-mail-MessagingMenu-counter,
+.o_menu_systray .o-mail-ActivityMenu-counter {
+    display: none !important;
+}
+
+/* Hide useless items in user profile dropdown */
+.o_user_menu .dropdown-item[data-menu="documentation"],
+.o_user_menu .dropdown-item[data-menu="support"],
+.o_user_menu .dropdown-item[data-menu="odoo_account"],
+.o_user_menu .dropdown-item[href*="odoo.com"] {
+    display: none !important;
+}
+
+/* =========================================
+   CUSTOM 7 ASSET TYPE COLORS FOR TREE VIEWS
+   ========================================= */
+.text-itcomputer { color: #00e5ff !important; font-weight: 500; }  /* Neon Cyan */
+.text-itmonitor { color: #69f0ae !important; font-weight: 500; }   /* Mint Green */
+.text-itphone { color: #f97316 !important; font-weight: 500; }     /* Saturated Orange */
+.text-itnetwork { color: #b388ff !important; font-weight: 500; }   /* Neon Purple */
+.text-itprinter { color: #ff80ab !important; font-weight: 500; }   /* Neon Pink */
+.text-itconsumable { color: #ffd740 !important; font-weight: 500; }/* Neon Yellow */
+.text-itsoftware { color: #f8fafc !important; font-weight: 500; }  /* Bright White */
+
+/* =========================================
+   CUSTOM STATE COLORS FOR ASSIGNMENT & REPAIR
+   ========================================= */
+.text-itneon-green { color: #39ff14 !important; font-weight: 500; }  /* Neon Green (Active / Done) */
+.text-itneon-yellow { color: #ffd600 !important; font-weight: 500; } /* Neon Yellow (In Progress) */
+.text-itneon-slate { color: #cbd5e1 !important; font-weight: 500; }  /* Bright Slate (Returned / Cancelled) */
+.text-itneon-red { color: #ff1744 !important; font-weight: 500; }    /* Neon Red (Overdue) */
+
+/* =========================================
+   CUSTOM BADGE BACKGROUNDS (Odoo widget="badge")
+   ========================================= */
+/* For Asset Types (Just in case they are used as badges) */
+.text-bg-itcomputer { background-color: rgba(0, 229, 255, 0.15) !important; color: #00e5ff !important; border: 1px solid rgba(0, 229, 255, 0.5) !important; }
+.text-bg-itmonitor { background-color: rgba(105, 240, 174, 0.15) !important; color: #69f0ae !important; border: 1px solid rgba(105, 240, 174, 0.5) !important; }
+.text-bg-itphone { background-color: rgba(249, 115, 22, 0.15) !important; color: #f97316 !important; border: 1px solid rgba(249, 115, 22, 0.5) !important; }
+.text-bg-itnetwork { background-color: rgba(179, 136, 255, 0.15) !important; color: #b388ff !important; border: 1px solid rgba(179, 136, 255, 0.5) !important; }
+.text-bg-itprinter { background-color: rgba(255, 128, 171, 0.15) !important; color: #ff80ab !important; border: 1px solid rgba(255, 128, 171, 0.5) !important; }
+.text-bg-itconsumable { background-color: rgba(255, 215, 64, 0.15) !important; color: #ffd740 !important; border: 1px solid rgba(255, 215, 64, 0.5) !important; }
+.text-bg-itsoftware { background-color: rgba(248, 250, 252, 0.15) !important; color: #f8fafc !important; border: 1px solid rgba(248, 250, 252, 0.5) !important; }
+
+/* For Assignment & Repair States */
+.text-bg-itneon-green { background-color: rgba(57, 255, 20, 0.15) !important; color: #39ff14 !important; border: 1px solid rgba(57, 255, 20, 0.5) !important; }
+.text-bg-itneon-yellow { background-color: rgba(255, 214, 0, 0.15) !important; color: #ffd600 !important; border: 1px solid rgba(255, 214, 0, 0.5) !important; }
+.text-bg-itneon-slate { background-color: rgba(203, 213, 225, 0.15) !important; color: #cbd5e1 !important; border: 1px solid rgba(203, 213, 225, 0.5) !important; }
+.text-bg-itneon-red { background-color: rgba(255, 23, 68, 0.15) !important; color: #ff1744 !important; border: 1px solid rgba(255, 23, 68, 0.5) !important; }

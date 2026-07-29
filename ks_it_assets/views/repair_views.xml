@@ -7,9 +7,9 @@
         <field name="name">ks.it.repair.tree</field>
         <field name="model">ks.it.repair</field>
         <field name="arch" type="xml">
-            <tree decoration-warning="state == 'in_progress'"
-                  decoration-success="state == 'done'"
-                  decoration-muted="state == 'cancelled'">
+            <tree decoration-itneon-yellow="state == 'in_progress'"
+                  decoration-itneon-green="state == 'done'"
+                  decoration-itneon-slate="state == 'cancelled'">
                 <field name="name" string="Talep No"/>
                 <field name="asset_id"/>
                 <field name="repair_type"/>
@@ -26,7 +26,7 @@
                         class="btn-sm btn-warning"
                         invisible="state != 'draft'"/>
                 <button name="action_done" type="object"
-                        string="Tamamlandı"
+                        string="✓ Tamamlandı olarak İşaretle"
                         class="btn-sm btn-success"
                         invisible="state != 'in_progress'"/>
             </tree>
