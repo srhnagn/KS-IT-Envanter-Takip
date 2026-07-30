@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Action to print QR Label -->
+        <record id="action_report_qr_label" model="ir.actions.report">
+            <field name="name">Cihaz QR Etiketi Yazdır</field>
+            <field name="model">ks.it.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ks_it_assets.report_qr_label_template</field>
+            <field name="report_file">ks_it_assets.report_qr_label_template</field>
+            <field name="print_report_name">'QR_Etiket_%s' % (object.barcode or 'Bilinmiyor')</field>
+            <field name="binding_model_id" ref="model_ks_it_asset"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- QR Label QWeb Template -->
+        <template id="report_qr_label_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!-- Basic Document Structure for a small square label (e.g. 50x50mm) -->
+                    <t t-call="web.basic_layout">
+                        <div class="page" style="text-align: center; width: 50mm; height: 50mm; margin: 0 auto; border: 1px solid #ccc; padding-top: 5mm;">
+                            <div style="font-size: 10px; font-weight: bold; margin-bottom: 2mm;">
+                                Kaleseramik IT
+                            </div>
+                            
+                            <!-- Odoo built-in barcode generator for QR -->
+                            <img t-if="o.barcode" t-att-src="'/report/barcode/QR/%s' % o.barcode" style="width: 30mm; height: 30mm;"/>
+                            <div t-if="not o.barcode" style="width: 30mm; height: 30mm; border: 1px dashed red; line-height: 30mm;">
+                                Barkod Yok
+                            </div>
+                            
+                            <div style="font-size: 9px; margin-top: 2mm;">
+                                <span t-field="o.barcode"/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -13,5 +13,12 @@
             <field name="prefix">SRV-%(year)s-</field>
             <field name="padding">4</field>
         </record>
+        
+        <record id="sequence_ks_it_asset_barcode" model="ir.sequence">
+            <field name="name">KS IT Barkod Sırası</field>
+            <field name="code">ks.it.asset.barcode</field>
+            <field name="prefix">IT-%(year)s-</field>
+            <field name="padding">4</field>
+        </record>
     </data>
 </odoo>

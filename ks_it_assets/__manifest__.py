@@ -26,6 +26,7 @@ Kaleseramik IT Departmanı için özel olarak geliştirilmiş donanım, yazılı
         'data/sequences.xml',
         'data/cron_jobs.xml',
         'reports/assignment_report.xml',
+        'reports/qr_label_report.xml',
         'views/dashboard_views.xml',
         'views/asset_views.xml',
         'views/assignment_views.xml',

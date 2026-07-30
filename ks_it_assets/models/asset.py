@@ -55,6 +55,13 @@ class KsItAsset(models.Model):
             else:
                 asset.current_assignee_id = False
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get('barcode'):
+                vals['barcode'] = self.env['ir.sequence'].next_by_code('ks.it.asset.barcode') or 'NEW'
+        return super(KsItAsset, self).create(vals_list)
+
     def action_open_form(self):
         """Tablodaki butona basılınca varlığın tam form görünümünü açar."""
         self.ensure_one()
