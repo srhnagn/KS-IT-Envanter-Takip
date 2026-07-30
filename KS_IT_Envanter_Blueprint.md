@@ -53,5 +53,5 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 
 ## Yapılacaklar (To-Do) Listesi
 
-- [ ] **QR Kod ve Barkod Entegrasyonu:** Her IT donanımına (laptop, monitör, switch vb.) özel, benzersiz QR kod üreten yapının kodlanması ve Odoo QWeb raporlama motoru kullanılarak barkod etiketlerinin PDF şablonlarının tasarlanması.
-- [ ] **Otomatik Garanti ve Bakım Uyarı Sistemi (Cron Jobs):** Garanti süresinin bitimine örneğin 30 gün kalan cihazları tespit eden arka plan işlemlerinin (Scheduled Actions / Cron Jobs) yazılması ve IT ekibine otomatik Odoo/E-posta bildirimlerinin (email triggers) kurulması.
+- [x] **QR Kod ve Barkod Entegrasyonu:** Her IT donanımına (laptop, monitör, switch vb.) özel, benzersiz QR kod üreten yapının kodlanması ve Odoo QWeb raporlama motoru kullanılarak barkod etiketlerinin PDF şablonlarının tasarlanması.
+- [x] **Otomatik Garanti ve Bakım Uyarı Sistemi (Cron Jobs):** Garanti süresinin bitimine örneğin 30 gün kalan cihazları tespit eden arka plan işlemlerinin (Scheduled Actions / Cron Jobs) yazılması ve IT ekibine otomatik Odoo/E-posta bildirimlerinin (email triggers) kurulması.
