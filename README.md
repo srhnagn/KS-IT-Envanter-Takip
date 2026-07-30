@@ -6,7 +6,7 @@ KS IT Asset Manager, Odoo 17 altyapısı üzerinde tamamen sıfırdan geliştiri
 
 ## ✨ Temel Özellikler (Key Features)
 
-* **Detaylı IT Envanteri:** Bilgisayar, Monitör, Yazılım Lisansı, Ağ Cihazı, Akıllı Telefon/Tablet, Yazıcı ve Sarf Malzemeler için özel oluşturulmuş 7 farklı yüksek kontrastlı (Neon) renk kategorisiyle donanım takibi.
+* **Detaylı IT Envanteri:** Bilgisayar, Monitör, Yazılım Lisansı, Ağ Cihazı, Akıllı Telefon/Tablet, Yazıcı ve Sarf Malzemeler için özel oluşturulmuş 7 farklı kategoriyle envanterdekı yazılım ve donanımların takibi.
 * **Gelişmiş Zimmet (Assignment) Yönetimi:** 
   * Cihazları personellere veya departmanlara **Kalıcı (Permanent)** veya **Geçici (Temporary)** olarak zimmetleme.
   * Odoo'nun QWeb PDF motoruyla tek tıkla şirket formatına ve ıslak imzaya hazır **Zimmet/Teslim Tutanağı** basımı.
@@ -24,15 +24,52 @@ KS IT Asset Manager, Odoo 17 altyapısı üzerinde tamamen sıfırdan geliştiri
 * **Frontend:** Odoo Web Library (OWL) JS, QWeb (XML), SCSS, Bootstrap
 * **Mimari:** Modüler, MVC (Model-View-Controller) ve Object Relational Mapping (ORM)
 
-## 🚀 Kurulum (Installation)
-1. Modülü Odoo `addons/` klasörünüzün veya kendi custom eklenti yolunuzun içerisine taşıyın.
-2. `odoo.conf` dosyanızda eklenti yolunu (addons_path) doğru tanımladığınızdan emin olun.
-3. Odoo arayüzüne Geliştirici Modunda (Developer Mode) giriş yapıp "Uygulama Listesini Güncelle (Update Apps List)" seçeneğine tıklayın.
-4. Uygulamalar (Apps) arasından **KS IT Envanter Takip** modülünü bularak kurun (Etkinleştirin).
-5. (Opsiyonel) Odoo sunucusunu yeniden başlatarak JavaScript ve SCSS asset'lerinin derlenmesini sağlayın.
+## 🚀 Projeyi İlk Kez Kuracak Geliştiriciler İçin (Kurulum Rehberi)
+Projeyi bilgisayarınıza çektikten (clone) sonra şu adımları izleyin:
+
+### 1. PostgreSQL Kurulumu
+Odoo'nun çalışması için lokalinizde PostgreSQL olmalıdır. (Mac için Homebrew önerilir)
+```bash
+brew install postgresql@17
+brew services start postgresql@17
+createdb kaleseramik_db
+```
+
+### 2. Odoo Yapılandırması (`odoo.conf`)
+Proje ana dizininde bulunan `odoo.conf` dosyasının içindeki veritabanı adını kendi oluşturduğunuz DB adıyla eşleştirin. Örnek bir `odoo.conf` içeriği şu şekilde olmalıdır:
+
+```ini
+[options]
+admin_passwd = gizli_master_sifre
+db_host = False
+db_port = False
+db_user = bilgisayar_kullanici_adiniz
+db_password = False
+addons_path = /odoo/addons_yolu, /kendi_projenizin_yolu
+```
+
+### 3. Modülü Yükleme (Otomatik Veritabanı İnşası)
+PostgreSQL'de tabloları sizin elle oluşturmanıza gerek yoktur! Aşağıdaki komutu çalıştırdığınızda Odoo, Python modellerini okuyacak ve veritabanı şemasını sizin için sıfırdan çizecektir:
+
+```bash
+./start.sh -i ks_it_assets
+```
+
+*Not: `-i` parametresi (install) modülü kurar. Sonraki çalıştırmalarınızda kod güncellemelerini yansıtmak için `./start.sh -u ks_it_assets` (update) kullanmalısınız.*
+
+### 4. Arayüze Erişim
+Kurulum bittikten sonra geliştirme (local) ortamında tarayıcınızdan `http://localhost:8069` adresine giderek sisteme giriş yapabilirsiniz. 
+
+*(Not: Eğer sistem canlı sunucuya (Production) alınırsa, tarayıcıdan localhost yerine doğrudan sunucunun IP adresi veya kurumun belirlediği alan adı - örneğin: `https://erp.kaleseramik.com` - üzerinden sisteme girilir. Port numarası veya ek bir kurulum gerekmez, Odoo web portunu otomatik dışarı açar.)*
 
 ## 🤝 İş Akışı (Business Logic) Notları
 Bu modül, büyük işletmelerin "Lokasyon/Fiziksel Durum" ile "Yasal Zimmet" ayrımını yapabilmesi için tasarlanmıştır. Örneğin; bir laptop garantiye (servise) gönderildiğinde personelin üzerindeki "zimmeti" yasal olarak düşmez, sadece "arızalı" veya "serviste" durumuna geçer. Bu sayede personel ve cihaz arasındaki kurumsal bağ kopmamış olur.
+
+---
+
+## ⚖️ Lisans ve Telif Hakkı (License)
+**Proprietary License (Özel Ticari Lisans)**
+Bu yazılımın tüm telif hakları geliştiricisine aittir. Kaynak kodları kopyalanamaz, çoğaltılamaz, izinsiz dağıtılamaz, değiştirilemez veya farklı bir marka/isim altında ticari olarak satılamaz. Yazılımın her türlü ticari kullanımı, kurulumu ve kurumsal entegrasyonu tamamen geliştiricinin özel iznine ve lisans sözleşmelerine tabidir.
 
 ---
 **Geliştirici:** Serhan Ağan 
