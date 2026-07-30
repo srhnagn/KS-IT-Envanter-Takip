@@ -39,9 +39,9 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 *   **Problem:** Cihaz teslimlerinde Word/Excel üzerinden manuel tutanak doldurmanın getirdiği zaman kaybı.
 *   **Çözüm:** Odoo'nun **QWeb PDF Raporlama Motoru** kullanılarak, zimmet işlemi yapıldığı an tek tıkla şirket logolu, cihaz seri numaralı ve teslim alan personel bilgileriyle dolu, ıslak imzaya hazır bir PDF Tutanak üretimi sağlandı.
 
-### 3. Barkod / Seri Numarası Taraması
-*   **Problem:** Sahada yüzlerce cihaz arasında doğru ekipmanı bulmanın zorluğu.
-*   **Çözüm:** Varlıklar (`ks.it.asset`) tablosuna bir `barcode` alanı eklendi. Gelecekte bir barkod okuyucu veya mobil kamera ile sisteme entegrasyon yapılabilmesi için temel veritabanı altyapısı hazırlandı.
+### 3. Dinamik QR Kod Üretimi ve PDF Etiket Basımı (QWeb)
+*   **Problem:** Sahada yüzlerce cihaz arasında doğru ekipmanı bulmanın zorluğu ve donanımları fiziksel olarak numaralandırma/etiketleme ihtiyacı.
+*   **Çözüm:** Python kütüphaneleri kullanılarak sisteme eklenen her IT donanımına (laptop, monitör, switch vb.) özel benzersiz bir QR kod üreten bir yapı entegre edildi. Ayrıca Odoo'nun QWeb raporlama motoruyla bu QR kodları cihazların üzerine yapıştırılacak kare etiketler (QR Label) formatında topluca çıktı almayı sağlayan PDF şablonları tasarlandı.
 
 ### 4. Ekstra (Blueprint'te Olmayan) Mükemmelleştirmeler
 *   **Özelleştirilmiş Yönetim Paneli:** OWL (Odoo Web Library) JS tabanlı modern Dashboard.
@@ -49,3 +49,9 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 *   **Dinamik Tasarım:** Satır renkleriyle eşleşen ve transparan zemin kullanan Odoo Badge (Rozet) tasarımları.
 *   **Kurumsal Servis Simülasyonu:** Teknik Servis mantığının kurumsal ERP iş akışına göre simüle edilmesi (Servis dönüşünde önceki zimmetin tanınması vb.).
 *   **Dinamik Uyarılar:** Geciken ödünç zimmetler için dinamik hesaplanan durum tetikleyicileri (`display_state`).
+
+
+## Yapılacaklar (To-Do) Listesi
+
+- [ ] **QR Kod ve Barkod Entegrasyonu:** Her IT donanımına (laptop, monitör, switch vb.) özel, benzersiz QR kod üreten yapının kodlanması ve Odoo QWeb raporlama motoru kullanılarak barkod etiketlerinin PDF şablonlarının tasarlanması.
+- [ ] **Otomatik Garanti ve Bakım Uyarı Sistemi (Cron Jobs):** Garanti süresinin bitimine örneğin 30 gün kalan cihazları tespit eden arka plan işlemlerinin (Scheduled Actions / Cron Jobs) yazılması ve IT ekibine otomatik Odoo/E-posta bildirimlerinin (email triggers) kurulması.

@@ -17,7 +17,7 @@ KS IT Asset Manager, Odoo 17 altyapısı üzerinde tamamen sıfırdan geliştiri
 * **Otomatik Garanti Uyarısı (Cron Job):** Arka planda çalışan Python otonom görevleri sayesinde garanti süresinin bitimine 30 gün kalan tüm cihazlar için sistem otomatik olarak yöneticiye "Aktivite/Görev" atar.
 * **Modern ve Özelleştirilmiş OWL Dashboard:** Odoo Web Library (JavaScript) kullanılarak yazılmış, tüm departmanın genel durumunu, arızalı cihazları ve geciken ödünçleri tek ekranda gösteren canlı raporlama paneli.
 * **Koyu Tema (Dark Mode) Uyumluluğu:** SCSS ile geliştirilmiş ve gece modunda bile göz yormayan, transparan zemin kullanan yüksek çözünürlüklü etiket (Badge) tasarımları.
-* **Barkod Altyapısı:** El terminalleri ve mobil cihazlar için veritabanında hazır bekleyen `barcode` mimarisi.
+* **Dinamik QR Kod ve PDF Etiket Basımı (QWeb):** Python kütüphaneleriyle sistemdeki her cihaz için otonom olarak benzersiz QR kod üreten altyapı ve bu kodları donanımların üzerine yapıştırmak üzere tasarlanmış kare formatlı (QR Label) PDF raporlama çıktısı.
 
 ## 🛠 Kullanılan Teknolojiler
 * **Backend:** Python 3.10+, Odoo 17 Framework, PostgreSQL
