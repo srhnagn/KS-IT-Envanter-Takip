@@ -18,6 +18,8 @@ KS IT Asset Manager, Odoo 17 altyapısı üzerinde tamamen sıfırdan geliştiri
 * **Modern ve Özelleştirilmiş OWL Dashboard:** Odoo Web Library (JavaScript) kullanılarak yazılmış, tüm departmanın genel durumunu, arızalı cihazları ve geciken ödünçleri tek ekranda gösteren canlı raporlama paneli.
 * **Koyu Tema (Dark Mode) Uyumluluğu:** SCSS ile geliştirilmiş ve gece modunda bile göz yormayan, transparan zemin kullanan yüksek çözünürlüklü etiket (Badge) tasarımları.
 * **Dinamik QR Kod ve PDF Etiket Basımı (QWeb):** Python kütüphaneleriyle sistemdeki her cihaz için otonom olarak benzersiz QR kod üreten altyapı ve bu kodları donanımların üzerine yapıştırmak üzere tasarlanmış kare formatlı (QR Label) PDF raporlama çıktısı.
+* **Active Directory (LDAP) Entegrasyon Altyapısı:** Kurumsal ağlarda personellerin tek şifreyle güvenli giriş yapabilmesi için, IT yöneticilerinin production ortamında kolayca bağlayabileceği Enterprise LDAP yetkilendirme altyapısı.
+* **Kalite Güvence (QA) ve Unit Testing:** Sistemin hata toleransını ölçmek için geliştirilmiş özel Odoo Test betikleri (`test_ks_it_asset.py`). Otomatik barkod ve Cron Job gibi kritik arka plan süreçleri sahte (dummy) cihazlarla izole ortamda doğrulanmıştır.
 
 ## 🛠 Kullanılan Teknolojiler
 * **Backend:** Python 3.10+, Odoo 17 Framework, PostgreSQL

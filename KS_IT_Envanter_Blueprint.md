@@ -43,7 +43,12 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 *   **Problem:** Sahada yüzlerce cihaz arasında doğru ekipmanı bulmanın zorluğu ve donanımları fiziksel olarak numaralandırma/etiketleme ihtiyacı.
 *   **Çözüm:** Python kütüphaneleri kullanılarak sisteme eklenen her IT donanımına (laptop, monitör, switch vb.) özel benzersiz bir QR kod üreten bir yapı entegre edildi. Ayrıca Odoo'nun QWeb raporlama motoruyla bu QR kodları cihazların üzerine yapıştırılacak kare etiketler (QR Label) formatında topluca çıktı almayı sağlayan PDF şablonları tasarlandı.
 
-### 4. Ekstra (Blueprint'te Olmayan) Mükemmelleştirmeler
+### 4. Kurumsal Active Directory (LDAP) Entegrasyon Altyapısı
+*   **Problem:** Büyük ölçekli kurumlarda personellerin farklı yazılımlara ayrı şifrelerle girmesinin yarattığı güvenlik açıkları ve IT yönetim zorluğu.
+*   **Çözüm:** Sistemin gelecekte şirketin merkezi Active Directory sunucusuyla entegre çalışabilmesi için gerekli kurumsal yetkilendirme altyapısı kodlandı. Böylece IT ağ yöneticilerinin canlıya alım (production) sırasında modülü LDAP ile tek tıkla haberleştirebileceği hazır, güvenli bir "Enterprise" login altyapısı oluşturuldu.
+
+### 5. Ekstra (Blueprint'te Olmayan) Mükemmelleştirmeler
+*   **Kalite Güvence (QA) ve Unit Testing:** Modülün doğruluğunu kanıtlamak adına kurumsal QA süreçleri uygulandı. Odoo Test betiği (`test_ks_it_asset.py`) kodlanarak sahte cihazlarla Cron Job ve otomatik barkod testleri başarıyla doğrulandı.
 *   **Özelleştirilmiş Yönetim Paneli:** OWL (Odoo Web Library) JS tabanlı modern Dashboard.
 *   **Koyu Tema Uyumluluğu:** CSS/SCSS ile Kaleseramik koyu temasına özel yüksek kontrastlı 7 farklı varlık kategorisi rengi (Neon renk paleti).
 *   **Dinamik Tasarım:** Satır renkleriyle eşleşen ve transparan zemin kullanan Odoo Badge (Rozet) tasarımları.
