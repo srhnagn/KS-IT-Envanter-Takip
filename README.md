@@ -68,8 +68,9 @@ Bu modül, büyük işletmelerin "Lokasyon/Fiziksel Durum" ile "Yasal Zimmet" ay
 ---
 
 ## ⚖️ Lisans ve Telif Hakkı (License)
-**Proprietary License (Özel Ticari Lisans)**
-Bu yazılımın tüm telif hakları geliştiricisine aittir. Kaynak kodları kopyalanamaz, çoğaltılamaz, izinsiz dağıtılamaz, değiştirilemez veya farklı bir marka/isim altında ticari olarak satılamaz. Yazılımın her türlü ticari kullanımı, kurulumu ve kurumsal entegrasyonu tamamen geliştiricinin özel iznine ve lisans sözleşmelerine tabidir.
+
+**Proprietary License (Özel Ticari Lisans)** Bu yazılımın tüm telif hakları geliştiricisine aittir. Kaynak kodları kopyalanamaz, çoğaltılamaz, izinsiz dağıtılamaz, değiştirilemez veya farklı bir marka/isim altında ticari olarak satılamaz. Yazılımın her türlü ticari kullanımı, kurulumu ve kurumsal entegrasyonu tamamen geliştiricinin özel iznine ve lisans sözleşmelerine tabidir.
 
 ---
+
 **Serhan Ağan** tarafından *Kaleseramik ERP ve Kurumsal Entegrasyon Projeleri Kapsamında Geliştirilmiştir.*
