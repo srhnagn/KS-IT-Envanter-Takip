@@ -28,6 +28,14 @@ class KsItAsset(models.Model):
     warranty_end_date = fields.Date(string='Garanti Bitiş Tarihi', tracking=True)
     warranty_warning_sent = fields.Boolean(string='Garanti Uyarısı Gönderildi', default=False, copy=False)
     
+    warranty_state = fields.Selection([
+        ('expired', 'Bitmiş'),
+        ('warning', 'Yaklaşıyor'),
+        ('valid', 'Devam Ediyor')
+    ], string='Garanti Durumu', compute='_compute_warranty_display', store=True)
+    
+    warranty_display = fields.Char(string='Garanti', compute='_compute_warranty_display', store=True)
+    
     barcode = fields.Char(string='Barkod / QR Kod', copy=False, tracking=True)
     
     status = fields.Selection([
@@ -55,12 +63,49 @@ class KsItAsset(models.Model):
             else:
                 asset.current_assignee_id = False
 
+    @api.depends('warranty_end_date')
+    def _compute_warranty_display(self):
+        today = fields.Date.today()
+        for asset in self:
+            if not asset.warranty_end_date:
+                asset.warranty_state = False
+                asset.warranty_display = ""
+                continue
+                
+            diff = relativedelta(asset.warranty_end_date, today)
+            days_diff = (asset.warranty_end_date - today).days
+            
+            if days_diff < 0:
+                asset.warranty_state = 'expired'
+                asset.warranty_display = "Bitmiş"
+            else:
+                parts = []
+                if diff.years > 0:
+                    parts.append(f"{diff.years} yıl")
+                if diff.months > 0:
+                    parts.append(f"{diff.months} ay")
+                if diff.days > 0 or (diff.years == 0 and diff.months == 0):
+                    parts.append(f"{diff.days} gün")
+                
+                time_str = " ".join(parts) + " kaldı"
+                
+                if days_diff <= 30:
+                    asset.warranty_state = 'warning'
+                    asset.warranty_display = time_str
+                else:
+                    asset.warranty_state = 'valid'
+                    asset.warranty_display = time_str
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if not vals.get('barcode'):
-                vals['barcode'] = self.env['ir.sequence'].next_by_code('ks.it.asset.barcode') or 'NEW'
-        return super(KsItAsset, self).create(vals_list)
+            if not vals.get('barcode') or vals.get('barcode') == '/':
+                seq = self.env['ir.sequence'].next_by_code('ks.it.asset.barcode')
+                if seq:
+                    vals['barcode'] = f"{seq}-QR"
+                else:
+                    vals['barcode'] = '/'
+        return super().create(vals_list)
 
     def action_open_form(self):
         """Tablodaki butona basılınca varlığın tam form görünümünü açar."""

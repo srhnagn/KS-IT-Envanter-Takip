@@ -7,20 +7,23 @@
         <field name="name">ks.it.asset.tree</field>
         <field name="model">ks.it.asset</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1"
-                  decoration-itcomputer="asset_type == 'computer'"
-                  decoration-itmonitor="asset_type == 'monitor'"
-                  decoration-itphone="asset_type == 'phone'"
-                  decoration-itnetwork="asset_type == 'network'"
-                  decoration-itprinter="asset_type == 'printer'"
-                  decoration-itconsumable="asset_type == 'consumable'"
-                  decoration-itsoftware="asset_type == 'software'">
-                <field name="name"/>
+            <tree multi_edit="1" class="ks-tree-asset"
+                  decoration-info="asset_type == 'computer'"
+                  decoration-warning="asset_type == 'monitor'"
+                  decoration-success="asset_type == 'phone'"
+                  decoration-danger="asset_type == 'network'"
+                  decoration-primary="asset_type == 'printer'"
+                  decoration-muted="asset_type == 'consumable'"
+                  decoration-bf="asset_type == 'software'">
+                <field name="name" string="Varlık Adı / Departman İçi Barkod"/>
                 <field name="asset_type"/>
                 <field name="brand"/>
                 <field name="model_name"/>
                 <field name="serial_number"/>
-                <field name="warranty_end_date" readonly="1"/>
+                <field name="mac_address" optional="hide"/>
+                <field name="purchase_date" optional="hide"/>
+                <field name="warranty_display" class="ks-warranty-cell" decoration-danger="warranty_state == 'expired'" decoration-warning="warranty_state == 'warning'" decoration-success="warranty_state == 'valid'"/>
+                <field name="warranty_state" column_invisible="1"/>
                 <field name="current_assignee_id" string="Kullanıcı" readonly="1"/>
                 <field name="status" widget="badge"
                        decoration-success="status == 'available'"
@@ -116,7 +119,7 @@
                     <notebook>
                         <page string="Zimmet ve Ödünç Geçmişi">
                             <field name="assignment_ids" readonly="1">
-                                <tree decoration-itneon-green="state == 'active'" decoration-itneon-slate="state == 'returned'">
+                                <tree class="ks-tree-assign" decoration-success="state == 'active'" decoration-muted="state == 'returned'">
                                     <field name="name"/>
                                     <field name="employee_id"/>
                                     <field name="assignment_type"/>
@@ -124,15 +127,15 @@
                                     <field name="expected_return_date"/>
                                     <field name="state" column_invisible="1"/>
                                     <field name="display_state" string="Durum" widget="badge"
-                                           decoration-itneon-green="state == 'active' and not (assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date)"
-                                           decoration-itneon-slate="state == 'returned'"
-                                           decoration-itneon-red="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'"/>
+                                           decoration-success="state == 'active' and not (assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date)"
+                                           decoration-muted="state == 'returned'"
+                                           decoration-danger="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Tamir ve Servis Geçmişi">
                             <field name="repair_ids" readonly="1">
-                                <tree decoration-itneon-yellow="state == 'in_progress'" decoration-itneon-green="state == 'done'">
+                                <tree class="ks-tree-repair" decoration-warning="state == 'in_progress'" decoration-success="state == 'done'">
                                     <field name="name"/>
                                     <field name="repair_type"/>
                                     <field name="technician_id"/>

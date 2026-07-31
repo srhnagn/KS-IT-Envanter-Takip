@@ -7,9 +7,9 @@
         <field name="name">ks.it.assignment.tree</field>
         <field name="model">ks.it.assignment</field>
         <field name="arch" type="xml">
-            <tree decoration-itneon-green="state == 'active'"
-                  decoration-itneon-slate="state == 'returned'"
-                  decoration-itneon-red="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'">
+            <tree class="ks-tree-assign" decoration-success="state == 'active'"
+                  decoration-muted="state == 'returned'"
+                  decoration-danger="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'">
                 <field name="name" string="İşlem Kodu"/>
                 <field name="asset_id"/>
                 <field name="employee_id"/>
@@ -18,10 +18,10 @@
                 <field name="expected_return_date"/>
                 <field name="state" column_invisible="1"/>
                 <field name="display_state" string="Durum" widget="badge"
-                       decoration-itneon-green="state == 'active' and not (assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date)"
+                       decoration-success="state == 'active' and not (assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date)"
                        decoration-info="state == 'draft'"
-                       decoration-itneon-slate="state == 'returned'"
-                       decoration-itneon-red="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'"/>
+                       decoration-muted="state == 'returned'"
+                       decoration-danger="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'"/>
                 <button name="action_confirm" type="object"
                         string="Onayla / Zimmetle"
                         class="btn-sm btn-success"

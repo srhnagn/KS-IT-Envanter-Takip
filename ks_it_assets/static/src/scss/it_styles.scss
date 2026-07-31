@@ -216,7 +216,7 @@ button:not(.btn-primary):not(.btn-secondary):not(.btn-light):not(.btn-danger):no
 }
 
 /* Mesajlaşma ve Chatter Gizleme (Müşteri İsteği) */
-.o-mail-MessagingMenu, .o_menu_systray .o-mail-MessagingMenu, .o-mail-Chatter, .o-mail-Form-chatter, .o_FormRenderer_chatterContainer {
+.o-mail-MessagingMenu, .o_menu_systray .o-mail-MessagingMenu {
     display: none !important;
 }
 
@@ -582,3 +582,88 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
 .text-bg-itneon-yellow { background-color: rgba(255, 214, 0, 0.15) !important; color: #ffd600 !important; border: 1px solid rgba(255, 214, 0, 0.5) !important; }
 .text-bg-itneon-slate { background-color: rgba(203, 213, 225, 0.15) !important; color: #cbd5e1 !important; border: 1px solid rgba(203, 213, 225, 0.5) !important; }
 .text-bg-itneon-red { background-color: rgba(255, 23, 68, 0.15) !important; color: #ff1744 !important; border: 1px solid rgba(255, 23, 68, 0.5) !important; }
+
+/* =========================================
+   Odoo Standard Class Overrides for Neon Colors (XML Validator Bypass)
+   ========================================= */
+
+/* KS IT Asset Tree (Cihaz Listesi) */
+.ks-tree-asset .text-info { color: #00e5ff !important; font-weight: 500; }      /* computer */
+.ks-tree-asset .text-warning { color: #69f0ae !important; font-weight: 500; }   /* monitor */
+.ks-tree-asset .text-success { color: #f97316 !important; font-weight: 500; }   /* phone */
+.ks-tree-asset .text-danger { color: #b388ff !important; font-weight: 500; }    /* network */
+.ks-tree-asset .text-primary { color: #ff80ab !important; font-weight: 500; }   /* printer */
+.ks-tree-asset .text-muted { color: #ffd740 !important; font-weight: 500; }     /* consumable */
+
+/* KS IT Assignment Tree (Zimmet Listesi) */
+.ks-tree-assign .text-success { color: #39ff14 !important; font-weight: 500; }  /* active */
+.ks-tree-assign .text-muted { color: #cbd5e1 !important; font-weight: 500; }    /* returned */
+.ks-tree-assign .text-danger { color: #ff1744 !important; font-weight: 500; }   /* delayed */
+
+/* KS IT Repair Tree (Tamir Listesi) */
+.ks-tree-repair .text-warning { color: #ffd600 !important; font-weight: 500; }  /* in_progress */
+.ks-tree-repair .text-success { color: #39ff14 !important; font-weight: 500; }  /* done */
+
+/* Fix Badge Backgrounds globally for this module */
+.text-bg-success { 
+    background-color: rgba(57, 255, 20, 0.15) !important; 
+    color: #39ff14 !important;
+    border: 1px solid rgba(57, 255, 20, 0.5) !important; 
+}
+.text-bg-warning { 
+    background-color: rgba(255, 214, 0, 0.15) !important; 
+    color: #ffd600 !important;
+    border: 1px solid rgba(255, 214, 0, 0.5) !important; 
+}
+.text-bg-muted { 
+    background-color: rgba(203, 213, 225, 0.15) !important; 
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(203, 213, 225, 0.5) !important; 
+}
+.text-bg-danger { 
+    background-color: rgba(255, 23, 68, 0.15) !important; 
+    color: #ff1744 !important;
+    border: 1px solid rgba(255, 23, 68, 0.5) !important; 
+}
+
+/* =========================================
+   WARRANTY STATUS INDICATOR DOTS & COLORS
+   ========================================= */
+.ks-warranty-cell {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* BITMIS: Kırmızı (Cyberpunk Crimson - Kategorilerden farklı) */
+.o_list_table tr td .ks-warranty-cell.text-danger,
+.o_list_table tr td.ks-warranty-cell.text-danger {
+    color: #ff003c !important; 
+    font-weight: 600;
+}
+.ks-warranty-cell.text-danger::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #ff003c; box-shadow: 0 0 6px #ff003c; margin-left: 12px;
+}
+
+/* YAKLASIYOR: Turuncu/Sarı (Amber Gold - Kategorilerden farklı) */
+.o_list_table tr td .ks-warranty-cell.text-warning,
+.o_list_table tr td.ks-warranty-cell.text-warning {
+    color: #ffaa00 !important;
+    font-weight: 600;
+}
+.ks-warranty-cell.text-warning::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #ffaa00; box-shadow: 0 0 6px #ffaa00; animation: ks-blink-fast 0.8s infinite; margin-left: 12px;
+}
+
+/* DEVAM EDIYOR: Yeşil (Laser Lime - Kategorilerden farklı) */
+.o_list_table tr td .ks-warranty-cell.text-success,
+.o_list_table tr td.ks-warranty-cell.text-success {
+    color: #10ff00 !important;
+    font-weight: 600;
+}
+.ks-warranty-cell.text-success::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #10ff00; box-shadow: 0 0 6px #10ff00; margin-left: 12px;
+}
+
+@keyframes ks-blink-fast { 0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; } }
