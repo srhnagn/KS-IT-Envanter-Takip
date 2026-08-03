@@ -39,9 +39,9 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 *   **Problem:** Cihaz teslimlerinde Word/Excel üzerinden manuel tutanak doldurmanın getirdiği zaman kaybı.
 *   **Çözüm:** Odoo'nun **QWeb PDF Raporlama Motoru** kullanılarak, zimmet işlemi yapıldığı an tek tıkla şirket logolu, cihaz seri numaralı ve teslim alan personel bilgileriyle dolu, ıslak imzaya hazır bir PDF Tutanak üretimi sağlandı.
 
-### 3. Dinamik QR Kod Üretimi ve PDF Etiket Basımı (QWeb)
+### 3. Dinamik QR Kod Üretimi, PDF Etiket Basımı ve El Terminali Altyapısı
 *   **Problem:** Sahada yüzlerce cihaz arasında doğru ekipmanı bulmanın zorluğu ve donanımları fiziksel olarak numaralandırma/etiketleme ihtiyacı.
-*   **Çözüm:** Python kütüphaneleri kullanılarak sisteme eklenen her IT donanımına (laptop, monitör, switch vb.) özel benzersiz bir QR kod üreten bir yapı entegre edildi. Ayrıca Odoo'nun QWeb raporlama motoruyla bu QR kodları cihazların üzerine yapıştırılacak kare etiketler (QR Label) formatında topluca çıktı almayı sağlayan PDF şablonları tasarlandı.
+*   **Çözüm:** Odoo'nun `ir.sequence` motoru kullanılarak, sisteme eklenen her yeni donanıma otomatik olarak "IT-2026-0001" formatında ardışık ve benzersiz barkodlar atayan algoritma kodlandı. İleride el terminalleriyle (Barcode Scanner) entegre çalışabilmesi için veritabanına Barkod/Seri Numarası tarama altyapısı kuruldu. Ayrıca Python kütüphaneleri kullanılarak bu cihazlara özel benzersiz QR kod üreten yapı entegre edildi ve QWeb ile etiket (QR Label) formatında PDF çıktısı alındı.
 
 ### 4. Kurumsal Active Directory (LDAP) Entegrasyon Altyapısı
 *   **Problem:** Büyük ölçekli kurumlarda personellerin farklı yazılımlara ayrı şifrelerle girmesinin yarattığı güvenlik açıkları ve IT yönetim zorluğu.
