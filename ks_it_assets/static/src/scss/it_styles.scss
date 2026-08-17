@@ -264,6 +264,9 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+    flex-wrap: wrap;
+    white-space: normal !important;
+    word-break: break-word;
 }
 
 /* BITMIS: Kırmızı */
