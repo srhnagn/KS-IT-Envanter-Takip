@@ -14,7 +14,7 @@ Kaleseramik IT Departmanı için özel olarak geliştirilmiş donanım, yazılı
     'author': "Serhan Agan",
     'website': "https://www.kaleseramik.com",
     'category': 'Human Resources',
-    'version': '1.0.6',
+    'version': '1.0.7',
 
     # Modülümüzün KS Envanter altyapısından ve Odoo'nun temel mail (chatter) yapısından faydalanması için
     'depends': ['base', 'mail'],
@@ -40,6 +40,7 @@ Kaleseramik IT Departmanı için özel olarak geliştirilmiş donanım, yazılı
             'ks_it_assets/static/src/scss/it_styles.scss',
             'ks_it_assets/static/src/js/navbar_fix.js',
             'ks_it_assets/static/src/js/dashboard.js',
+            'ks_it_assets/static/src/js/list_renderer_persist.js',
             'ks_it_assets/static/src/xml/dashboard.xml',
         ],
     },
