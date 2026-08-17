@@ -6,52 +6,43 @@ import { browser } from "@web/core/browser/browser";
 const STORAGE_KEY = "ks_list_widths";
 
 patch(ListRenderer.prototype, {
-    setup() {
-        super.setup();
-        this.ksRestoredWidths = false;
-    },
-
     freezeColumnWidths() {
-        const resModel = this.props.list && this.props.list.resModel;
+        super.freezeColumnWidths();
         
-        if (resModel && !this.keepColumnWidths) {
-            const key = `${STORAGE_KEY}_${resModel}`;
-            const saved = browser.localStorage.getItem(key);
-            
-            if (saved) {
-                try {
-                    const parsed = JSON.parse(saved);
-                    const table = this.tableRef.el;
-                    if (table) {
-                        const headers = [...table.querySelectorAll("thead th:not(.o_list_actions_header)")];
-                        
-                        // We must compute first to get default/content widths for columns we haven't manually resized
-                        // But we need to briefly un-fix table layout to let Odoo compute natural widths
-                        table.style.tableLayout = "auto";
-                        table.style.width = null;
-                        headers.forEach((th) => {
-                            th.style.width = null;
-                            th.style.maxWidth = null;
-                        });
-                        const computed = this.computeColumnWidthsFromContent();
-                        table.style.tableLayout = "fixed";
+        const resModel = this.props.list && this.props.list.resModel;
+        if (!resModel) return;
 
-                        // Now merge saved widths with computed widths
-                        this.columnWidths = headers.map((th, index) => {
-                            const fieldName = th.dataset.name;
-                            return (fieldName && parsed[fieldName]) ? parsed[fieldName] : computed[index];
-                        });
+        const key = `${STORAGE_KEY}_${resModel}`;
+        const saved = browser.localStorage.getItem(key);
+        
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                const table = this.tableRef.el;
+                if (!table) return;
 
-                        this.keepColumnWidths = true;
-                        this.ksRestoredWidths = true;
+                let applied = false;
+                const headers = [...table.querySelectorAll("thead th:not(.o_list_actions_header)")];
+                headers.forEach((th, index) => {
+                    const fieldName = th.dataset.name;
+                    if (fieldName && parsed[fieldName]) {
+                        const w = parsed[fieldName];
+                        th.style.width = `${w}px`;
+                        th.style.maxWidth = `${w}px`;
+                        if (this.columnWidths) {
+                            this.columnWidths[index] = w;
+                        }
+                        applied = true;
                     }
-                } catch (e) {
-                    console.warn("Failed to restore KS column widths", e);
+                });
+                
+                if (applied) {
+                    this.keepColumnWidths = true;
                 }
+            } catch (e) {
+                console.warn("Failed to restore KS column widths", e);
             }
         }
-        
-        super.freezeColumnWidths();
     },
 
     onStartResize(ev) {
@@ -65,7 +56,6 @@ patch(ListRenderer.prototype, {
             if (!table) return;
             const headers = [...table.querySelectorAll("thead th:not(.o_list_actions_header)")];
             
-            // Get existing saved widths to not overwrite un-rendered optional columns
             let widthsToSave = {};
             const saved = browser.localStorage.getItem(key);
             if (saved) {
@@ -74,7 +64,6 @@ patch(ListRenderer.prototype, {
 
             headers.forEach(th => {
                 const fieldName = th.dataset.name;
-                // If it has inline style width from resize, save it
                 if (fieldName && th.style.width) {
                     widthsToSave[fieldName] = parseFloat(th.style.width);
                 }
