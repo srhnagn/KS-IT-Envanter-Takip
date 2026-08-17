@@ -10,13 +10,14 @@ KS IT Asset Manager, Odoo 17 altyapısı üzerinde tamamen sıfırdan geliştiri
 * **Gelişmiş Zimmet (Assignment) Yönetimi:** 
   * Cihazları personellere veya departmanlara **Kalıcı (Permanent)** veya **Geçici (Temporary)** olarak zimmetleme.
   * Odoo'nun QWeb PDF motoruyla tek tıkla şirket formatına ve ıslak imzaya hazır **Zimmet/Teslim Tutanağı** basımı.
-  * Süresi gecikmiş "Geçici" zimmetlerde ekranlarda otomatik olarak devreye giren **Dinamik Neon Kırmızı (İadesi Gecikti)** uyarı rozetleri.
+  * Süresi gecikmiş "Geçici" zimmetlerde ekranlarda otomatik olarak devreye giren **Dinamik Kırmızı (İadesi Gecikti)** uyarı rozetleri.
 * **Kurumsal Teknik Servis Simülasyonu:** 
   * Arıza veya bakım durumundaki donanımların takibi. 
   * Bir cihaz servisten döndüğünde (Tamamlandı), sistem arka planda önceki sahibini tanır ve eski aktif zimmetine cihazı geri döndürerek iş akışını koparmadan sürdürür.
 * **Otomatik Garanti Uyarısı (Cron Job):** Arka planda çalışan Python otonom görevleri sayesinde garanti süresinin bitimine 30 gün kalan tüm cihazlar için sistem otomatik olarak yöneticiye "Aktivite/Görev" atar.
 * **Modern ve Özelleştirilmiş OWL Dashboard:** Odoo Web Library (JavaScript) kullanılarak yazılmış, tüm departmanın genel durumunu, arızalı cihazları ve geciken ödünçleri tek ekranda gösteren canlı raporlama paneli.
-* **Koyu Tema (Dark Mode) Uyumluluğu:** SCSS ile geliştirilmiş ve gece modunda bile göz yormayan, transparan zemin kullanan yüksek çözünürlüklü etiket (Badge) tasarımları.
+* **Sade ve Kurumsal Arayüz (Light Mode):** Tamamen aydınlık temaya (Light Mode) optimize edilmiş, göz yormayan temiz listeleme ve etiket (Badge) tasarımları.
+* **Dinamik Sütun Genişliği Hafızası:** Özel OWL JavaScript yamasıyla Odoo liste (Tree) görünümlerindeki sütun genişliklerinin kullanıcı bazlı olarak tarayıcıya (`localStorage`) kaydedilmesi.
 * **Otomatik Kodlama ve El Terminali Altyapısı (ir.sequence):** Sisteme eklenen her yeni donanıma otomatik olarak "IT-2026-0001" formatında ardışık benzersiz barkodlar atanır. Sistem, endüstriyel el terminalleri (Barcode Scanners) ile entegre çalışabilecek tarama altyapısına sahiptir.
 * **Dinamik QR Kod ve PDF Etiket Basımı (QWeb):** Python kütüphaneleriyle sistemdeki her cihaz için otonom olarak benzersiz QR kod üreten altyapı ve bu kodları donanımların üzerine yapıştırmak üzere tasarlanmış kare formatlı (QR Label) PDF raporlama çıktısı.
 * **Active Directory (LDAP) Entegrasyon Altyapısı:** Kurumsal ağlarda personellerin tek şifreyle güvenli giriş yapabilmesi için, IT yöneticilerinin production ortamında kolayca bağlayabileceği Enterprise LDAP yetkilendirme altyapısı.

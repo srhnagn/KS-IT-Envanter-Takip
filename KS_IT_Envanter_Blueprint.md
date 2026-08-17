@@ -11,7 +11,7 @@
 *   **🔴 Problem:** Manuel tutanaklar, cihaz lokasyonunun (kimde olduğunun) anlık bilinememesi, garanti sürelerinin kaçırılması ve teknik servis süreçlerinin belirsizliği.
 *   **🔧 Çözüm Süreci:** Odoo üzerinde özel modeller tasarlandı. Varlıklar (Cihazlar), Zimmet/Ödünç (Atama işlemleri) ve Teknik Servis kayıtları birbirine bağlandı. OWL (Odoo Web Library) kullanılarak JavaScript tabanlı anlık bir gösterge paneli (Dashboard) oluşturuldu.
 *   **🟢 Sonuç:** IT personeli tek ekrandan tüm envanterin özetini gördü, süresi dolan cihazları fark etti ve şirket içi donanım akışı tam kontrol altına alındı.
-*   **📊 Teknik Derinlik:** Çoklu ilişkilendirilmiş Python modellemesi (One2many, Many2one), Odoo OWL Framework (JavaScript/XML Dashboard), güvenlik katmanları ve özel SCSS teması.
+*   **📊 Teknik Derinlik:** Çoklu ilişkilendirilmiş Python modellemesi (One2many, Many2one), Odoo OWL Framework (JavaScript/XML Dashboard, Sütun Genişliği Hafızası), güvenlik katmanları ve özel SCSS teması.
 
 ---
 
@@ -50,8 +50,8 @@ Bu aşamalar projenin teknik derinliğini ve pratik faydasını en üst düzeye 
 ### 5. Ekstra (Blueprint'te Olmayan) Mükemmelleştirmeler
 *   **Kalite Güvence (QA) ve Unit Testing:** Modülün doğruluğunu kanıtlamak adına kurumsal QA süreçleri uygulandı. Odoo Test betiği (`test_ks_it_asset.py`) kodlanarak sahte cihazlarla Cron Job ve otomatik barkod testleri başarıyla doğrulandı.
 *   **Özelleştirilmiş Yönetim Paneli:** OWL (Odoo Web Library) JS tabanlı modern Dashboard.
-*   **Koyu Tema Uyumluluğu:** CSS/SCSS ile Kaleseramik koyu temasına özel yüksek kontrastlı 7 farklı varlık kategorisi rengi (Neon renk paleti).
-*   **Dinamik Tasarım:** Satır renkleriyle eşleşen ve transparan zemin kullanan Odoo Badge (Rozet) tasarımları.
+*   **Sade ve Kurumsal Açık Tema:** Koyu tema (Dark Mode) ve neon renkler tamamen kaldırılarak, göz yormayan, temiz ve kurumsal bir Açık Tema (Light Mode) tasarımı uygulandı.
+*   **Sütun Genişliği Hafızası (List View Persistence):** Özel OWL JavaScript yaması yazılarak Odoo'nun liste (Tree) görünümlerinde kullanıcıların sütun genişliklerini fare ile ayarlayıp tarayıcı hafızasına (`localStorage`) kaydetmeleri sağlandı.
 *   **Kurumsal Servis Simülasyonu:** Teknik Servis mantığının kurumsal ERP iş akışına göre simüle edilmesi (Servis dönüşünde önceki zimmetin tanınması vb.).
 *   **Dinamik Uyarılar:** Geciken ödünç zimmetler için dinamik hesaplanan durum tetikleyicileri (`display_state`).
 
