@@ -260,10 +260,10 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
    WARRANTY STATUS INDICATOR DOTS & COLORS
    ========================================= */
 .ks-warranty-cell {
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
 }
 
 /* BITMIS: Kırmızı */
@@ -273,7 +273,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-danger::after {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626; margin-left: 12px;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626;
 }
 
 /* YAKLASIYOR: Turuncu/Sarı */
@@ -283,7 +283,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-warning::after {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite; margin-left: 12px;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite;
 }
 
 /* DEVAM EDIYOR: Yeşil */
@@ -293,7 +293,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-success::after {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a; margin-left: 12px;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a;
 }
 
 @keyframes ks-blink-fast { 0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; } }
