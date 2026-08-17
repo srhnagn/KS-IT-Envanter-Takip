@@ -260,12 +260,12 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
    WARRANTY STATUS INDICATOR DOTS & COLORS
    ========================================= */
 .ks-warranty-cell {
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    white-space: normal !important;
-    word-break: break-word;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    min-width: 175px !important;
+    white-space: nowrap !important;
 }
 
 /* BITMIS: Kırmızı */
@@ -274,8 +274,8 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     color: #dc2626 !important; 
     font-weight: 600;
 }
-.ks-warranty-cell.text-danger::before {
-    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626; margin-right: 6px; vertical-align: 1px;
+.ks-warranty-cell.text-danger::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626;
 }
 
 /* YAKLASIYOR: Turuncu/Sarı */
@@ -284,8 +284,8 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     color: #d97706 !important;
     font-weight: 600;
 }
-.ks-warranty-cell.text-warning::before {
-    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite; margin-right: 6px; vertical-align: 1px;
+.ks-warranty-cell.text-warning::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite;
 }
 
 /* DEVAM EDIYOR: Yeşil */
@@ -294,8 +294,8 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     color: #16a34a !important;
     font-weight: 600;
 }
-.ks-warranty-cell.text-success::before {
-    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a; margin-right: 6px; vertical-align: 1px;
+.ks-warranty-cell.text-success::after {
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a;
 }
 
 @keyframes ks-blink-fast { 0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; } }
