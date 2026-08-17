@@ -7,14 +7,7 @@
         <field name="name">ks.it.asset.tree</field>
         <field name="model">ks.it.asset</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1" class="ks-tree-asset"
-                  decoration-info="asset_type == 'computer'"
-                  decoration-warning="asset_type == 'monitor'"
-                  decoration-success="asset_type == 'phone'"
-                  decoration-danger="asset_type == 'network'"
-                  decoration-primary="asset_type == 'printer'"
-                  decoration-muted="asset_type == 'consumable'"
-                  decoration-bf="asset_type == 'software'">
+            <tree multi_edit="1" class="ks-tree-asset">
                 <field name="name" string="Varlık Adı / Departman İçi Barkod"/>
                 <field name="asset_type"/>
                 <field name="brand"/>
@@ -119,7 +112,7 @@
                     <notebook>
                         <page string="Zimmet ve Ödünç Geçmişi">
                             <field name="assignment_ids" readonly="1">
-                                <tree class="ks-tree-assign" decoration-success="state == 'active'" decoration-muted="state == 'returned'">
+                                <tree class="ks-tree-assign">
                                     <field name="name"/>
                                     <field name="employee_id"/>
                                     <field name="assignment_type"/>
@@ -135,7 +128,7 @@
                         </page>
                         <page string="Tamir ve Servis Geçmişi">
                             <field name="repair_ids" readonly="1">
-                                <tree class="ks-tree-repair" decoration-warning="state == 'in_progress'" decoration-success="state == 'done'">
+                                <tree class="ks-tree-repair">
                                     <field name="name"/>
                                     <field name="repair_type"/>
                                     <field name="technician_id"/>

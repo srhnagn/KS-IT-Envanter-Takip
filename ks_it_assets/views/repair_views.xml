@@ -7,9 +7,7 @@
         <field name="name">ks.it.repair.tree</field>
         <field name="model">ks.it.repair</field>
         <field name="arch" type="xml">
-            <tree class="ks-tree-repair" decoration-warning="state == 'in_progress'"
-                  decoration-success="state == 'done'"
-                  decoration-muted="state == 'cancelled'">
+            <tree class="ks-tree-repair">
                 <field name="name" string="Talep No"/>
                 <field name="asset_id"/>
                 <field name="repair_type"/>

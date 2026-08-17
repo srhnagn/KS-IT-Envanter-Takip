@@ -7,9 +7,7 @@
         <field name="name">ks.it.assignment.tree</field>
         <field name="model">ks.it.assignment</field>
         <field name="arch" type="xml">
-            <tree class="ks-tree-assign" decoration-success="state == 'active'"
-                  decoration-muted="state == 'returned'"
-                  decoration-danger="assignment_type == 'temporary' and expected_return_date and expected_return_date &lt; current_date and state == 'active'">
+            <tree class="ks-tree-assign">
                 <field name="name" string="İşlem Kodu"/>
                 <field name="asset_id"/>
                 <field name="employee_id"/>
