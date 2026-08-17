@@ -260,12 +260,13 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
    WARRANTY STATUS INDICATOR DOTS & COLORS
    ========================================= */
 .ks-warranty-cell {
-    display: inline-flex !important;
-    align-items: center;
+    display: flex !important;
+    align-items: flex-start;
     justify-content: flex-start;
-    gap: 6px;
-    white-space: normal;
-    word-break: break-word;
+    gap: 8px;
+    white-space: normal !important;
+    word-break: break-word !important;
+    width: 100%;
 }
 
 /* BITMIS: Kırmızı */
@@ -275,7 +276,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-danger::before {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626; margin-top: 6px;
 }
 
 /* YAKLASIYOR: Turuncu/Sarı */
@@ -285,7 +286,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-warning::before {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #d97706; animation: ks-blink-fast 0.8s infinite; margin-top: 6px;
 }
 
 /* DEVAM EDIYOR: Yeşil */
@@ -295,7 +296,7 @@ button.o_pivot_download_button::after, button:has(> i.fa-download)::after { cont
     font-weight: 600;
 }
 .ks-warranty-cell.text-success::before {
-    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a;
+    content: ""; display: block; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background-color: #16a34a; margin-top: 6px;
 }
 
 @keyframes ks-blink-fast { 0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 1; } }
